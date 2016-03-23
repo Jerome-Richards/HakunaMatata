@@ -13,14 +13,17 @@ import edu.princeton.cs.StdDraw;
  ******************************************************************************/
 
 public class Body {
+
+    private static String picture;
     private Vector r;      // position
     private Vector v;      // velocity
     private final double mass;   // mass
 //    private double newVector[100][0];
-    public Body(Vector r, Vector v, double mass) {
+    public Body(Vector r, Vector v, double mass, String picture) {
         this.r = r;
         this.v = v;
         this.mass = mass;
+        this.picture = picture;
     } // Body( Vector, Vector, double )
 
     public void move(Vector f, double dt) {
@@ -41,6 +44,7 @@ public class Body {
     public void draw() {
         StdDraw.setPenRadius(0.015);
         StdDraw.point(r.cartesian(0), r.cartesian(1));
+        StdDraw.picture(r.cartesian(0), r.cartesian(1), Body.picture);
     } // draw()
 
     // this method is only needed if you want to change the size of the bodies

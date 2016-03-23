@@ -2,6 +2,7 @@ package nbody;
 
 import edu.princeton.cs.In;
 import edu.princeton.cs.StdDraw;
+import java.awt.Color;
 
 /**
  * ****************************************************************************
@@ -26,6 +27,7 @@ public class Universe {
     private final int N;             // number of bodies
     private final Body[] orbs;       // array of N bodies
 
+    
     // read universe from file
     public Universe(String fileName) {
 
@@ -41,6 +43,7 @@ public class Universe {
         StdDraw.setXscale(-radius, +radius);
         StdDraw.setYscale(-radius, +radius);
 
+
         // read in the N bodies
         orbs = new Body[N];
         for (int i = 0; i < N; i++) {
@@ -49,11 +52,12 @@ public class Universe {
             double vx = inputStream.readDouble();
             double vy = inputStream.readDouble();
             double mass = inputStream.readDouble();
+            String picture = inputStream.readString();
             double[] position = {rx, ry};
             double[] velocity = {vx, vy};
             Vector r = new Vector(position);
             Vector v = new Vector(velocity);
-            orbs[i] = new Body(r, v, mass);
+            orbs[i] = new Body(r, v, mass, picture);
         } // for
     } // Universe()
 
@@ -91,13 +95,18 @@ public class Universe {
     
     // client to simulate a universe
     public static void main(String[] args) {
+
+
         Universe newton = new Universe( args[1] );
         double dt = Double.parseDouble(args[0]);
         while (true) {
+            
             StdDraw.clear();
+            StdDraw.picture(0, 0, "soccer-field3.jpg");
             newton.increaseTime(dt);
             newton.draw();
             StdDraw.show(10);
+            
         } // while
     } // main( String [] )
 } // Universe
